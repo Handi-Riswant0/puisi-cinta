@@ -31,7 +31,12 @@
   <h1>Selamat datang di Puisi Cinta dari anak Teknik kiww ✨</h1>
   <button onclick="mulaiPuisi()">Mulai</button>
   <p id="output"></p>
-  <audio id="backsound" src="Abadi"></audio>
+
+  <!-- Pastikan file ini berada di folder yang sama dan berformat .mp3 -->
+  <audio id="backsound" preload="auto">
+    <source src="Abadi.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung pemutar audio.
+  </audio>
 
   <script>
     function ketik(teks, el, delay = 60, callback = null) {
@@ -52,12 +57,19 @@
       const output = document.getElementById("output");
       const backsound = document.getElementById("backsound");
 
-      // Perbaikan: setel audio dari awal dan set volume
+      // Perlu user interaction untuk autoplay di browser modern
+      backsound.pause(); // pastikan stop dulu
       backsound.currentTime = 0;
       backsound.volume = 0.5;
-      backsound.play().catch(err => {
-        console.log("Gagal memutar audio:", err);
-      });
+      const promise = backsound.play();
+
+      // Untuk debug jika terjadi error
+      if (promise !== undefined) {
+        promise.catch(error => {
+          console.log("Audio tidak bisa diputar otomatis:", error);
+          alert("Audio tidak bisa diputar. Pastikan browser mengizinkan autoplay atau klik 2x tombol.");
+        });
+      }
 
       ketik("🌹 Aku ingin mencintaimu dengan sederhana...\n", output, 50, () => {
         setTimeout(() => {
