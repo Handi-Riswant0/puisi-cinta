@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Puisi Cinta Teknik Kiww</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #fdf6f0;
+      color: #333;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 30px;
+      white-space: pre-wrap;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat datang di Puisi Cinta dari anak Teknik kiww ✨</h1>
+  <button onclick="mulaiPuisi()">Mulai</button>
+  <p id="output"></p>
+  <audio id="backsound" src="abadi.mp3"></audio>
+
+  <script>
+    function ketik(teks, el, delay = 60, callback = null) {
+      let i = 0;
+      el.innerHTML = "";
+      let interval = setInterval(() => {
+        if (i < teks.length) {
+          el.innerHTML += teks.charAt(i);
+          i++;
+        } else {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, delay);
+    }
+
+    function mulaiPuisi() {
+      const output = document.getElementById("output");
+      const backsound = document.getElementById("backsound");
+      backsound.play();
+
+      ketik("🌹 Aku ingin mencintaimu dengan sederhana...\n", output, 50, () => {
+        setTimeout(() => {
+          ketik("Dengan kata yang tak sempat diucapkan kayu kepada api yang menjadikannya abu.\n\n", output, 50, () => {
+            setTimeout(() => {
+              ketik("Aku ingin mencintaimu dengan sederhana...\n", output, 50, () => {
+                setTimeout(() => {
+                  ketik("Dengan isyarat yang tak sempat disampaikan awan kepada hujan yang menjadikannya tiada.\n\n~ Balqis Duha Rahma", output, 50);
+                }, 2000);
+              });
+            }, 3000);
+          });
+        }, 3000);
+      });
+    }
+  </script>
+</body>
+</html>
+
